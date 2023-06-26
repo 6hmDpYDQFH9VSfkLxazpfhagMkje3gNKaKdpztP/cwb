@@ -88,9 +88,9 @@ All the information they uncovered has been added to [3dbrew](https://www.3dbrew
 
 The result of all of this? All of the aforementioned issues have disappeared and it is now possible to launch apps without enabling LLE NIM, as the HLE stubs are accurate enough to satisfy the Home Menu!
 
-{{< sidebyside "image" "test"
-    "broken.png="
-    "working.png=" >}}
+{{< sidebyside "image" ""
+    "broken.png=filler"
+    "working.png=filler" >}}
 	
 ### Return installed titles in GetNumTickets and GetTicketList stubs. ([#6292](https://github.com/citra-emu/citra/pull/6292)) by [Steveice10](https://github.com/Steveice10)
 
@@ -269,9 +269,9 @@ Imagine the horror Citra users came across when in some games, like the aforemen
 
 This being an issue since late 2020, first time contributor Polar-Star set out to fix this once and for all. By allowing the rasterizer cache control over 4x4 and 8x4 textures properly, HP bars are finally fixed and give the player to view their stats once again!
 
-{{< sidebyside "image" "test"
-    "hpbroke.png="
-    "hpfix.png=" >}}
+{{< sidebyside "image" ""
+    "hpbroke.png=filler"
+    "hpfix.png=filler" >}}
 
 ## Fix distance vector used when calculating lighting distance attenuation. ([#6366](https://github.com/citra-emu/citra/pull/6366)) by [Steveice10](https://github.com/Steveice10)
 
@@ -289,16 +289,16 @@ For those who aren’t aware, PICA, the 3DS’s GPU, does not support programmab
 	
 Unfortunately, this wasn’t the end. After performing some tests, Citra developer [wwylele](https://github.com/wwylele) determined that the solution was not accurate to the hardware and thus could not be accepted into the codebase.
 
-{{< sidebyside "image" "test"
-    "lut3ds.png="
-    "lutnew.png=" >}}
+{{< sidebyside "image" ""
+    "lut3ds.png=filler"
+    "lutnew.png=filler" >}}
 	
 And after that, the issue was yet again abandoned throughout Citra’s developer drought. Until recently.
 Steveice10 picked up the issue and after writing a couple of basic hardware tests, came to the conclusion that the bug was different from what everyone had believed. It turns out that Citra always used the view vector when distance attenuation was enabled, something that doesn’t really make sense for directional light, which is usually a directional vector rather than a concrete position. By correcting the code to use the correct length, it not only fixed the background issue, but improved the lighting accuracy in general!
 
-{{< sidebyside "image" "test"
-    "xybefore.png="
-    "xynew.png=" >}}
+{{< sidebyside "image" ""
+    "xybefore.png=filler"
+    "xynew.png=filler" >}}
 	
 ## Custom textures rewrite ([#6452](https://github.com/citra-emu/citra/pull/6452)) by [GPUCode](https://github.com/GPUCode)
 
@@ -352,7 +352,7 @@ MMPX is a texture filter centered around the preservation of those classic pixel
 
 This new texture filter can be enabled in `Emulation -> Configure -> Graphics -> Renderer` (`Citra -> Preferences` on macOS).
 
-{{< juxtapose "103936e-1122-11ee-b5bd-6595d9b17862 " >}}
+{{< juxtapose "103936e-1122-11ee-b5bd-6595d9b17862" >}}
 
 # Audio
 
