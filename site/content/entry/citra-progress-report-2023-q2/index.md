@@ -352,7 +352,7 @@ MMPX is a texture filter centered around the preservation of those classic pixel
 
 This new texture filter can be enabled in `Emulation -> Configure -> Graphics -> Renderer` (`Citra -> Preferences` on macOS).
 
-{{< juxtapose "e103936e-1122-11ee-b5bd-6595d9b17862" >}}
+{{< juxtapose id="e103936e-1122-11ee-b5bd-6595d9b17862" >}}
 
 # Audio
 
