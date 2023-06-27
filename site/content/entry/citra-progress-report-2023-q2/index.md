@@ -116,7 +116,7 @@ In addition, the GSP module is now able to capture the screen framebuffers, whic
 
 *video is a placeholder for now until we get the actual videos uploaded*
 
-Exploring the file menu will also yield a pleasant surprise: there’s now a dedicated “Boot Home Menu” option in the GUI for Citra. This will both automatically detect the correct home menu application, and adjust your region setting based on the firmware region that you’re attempting to launch. In the past, the HOME Menu was entirely hidden from the game list, forcing potential users to go on a wild goose chase inside the NAND folder in an attempt to find the correct application file for their corresponding region.
+Exploring the `File` menu will also yield a pleasant surprise: there’s now a dedicated “Boot Home Menu” option in the GUI for Citra. This will both automatically detect the correct home menu application, and adjust your region setting based on the firmware region that you’re attempting to launch. In the past, the HOME Menu was entirely hidden from the game list, forcing potential users to go on a wild goose chase inside the NAND folder in an attempt to find the correct application file for their corresponding region.
 You can now say goodbye to wasting time trying to find the correct app name, as Citra will take care of that for you!
 
 {{< figure src="boot.png"
@@ -182,7 +182,7 @@ Another benefit of this approach is that it’s quite simple to migrate from an 
 
 As Android is an ever evolving operating system, there are many technologies that utilize it. One of these are TVs! By using the Android TV Leanback Launcher, first time contributor DRayX brings Citra to the big screen. Leanback is what is used on Android TVs to display and use mobile apps via either the Google Play Store or an installed .apk file.
 
-Android TV support for Citra was planned in the past, but due to a lack of testers and developers, it had to unfortunately be scrapped. Thankfully, with time and effort, we are able to provide Android TV support as we initially hoped!
+Android TV support for Citra was planned in the past, but due to a lack of testers and developers, it had to unfortunately be scrapped. Thankfully, with time and effort, we are able to provide support for launching Citra on an Android TV as we initially hoped!
 
 ## Citra Android theme overhaul! ([#6332](https://github.com/citra-emu/citra/pull/6332) [#6335](https://github.com/citra-emu/citra/pull/6335), [#6351](https://github.com/citra-emu/citra/pull/6351), [#6355](https://github.com/citra-emu/citra/pull/6355), [#6349](https://github.com/citra-emu/citra/pull/6349)) by [t895](https://github.com/t895)
 
@@ -202,7 +202,9 @@ And finally, edge-to-edge display. No longer do you need to worry about that pes
 
 All of these changes add up into one big overhaul of our UI, bringing the freshest look right to your device! We have more planned for our UI on Android in the future, so keep an eye out here and we’ll update you when we can!
 
-{{< gifv src="showcase.mp4" title="" >}}
+{{< sidebyside "image" ""
+    "themeb4.jpg=filler"
+    "themenew.jpg=filler" >}}
 
 ### Avoid reopening files every time a shader needs to be written. ([#6344](https://github.com/citra-emu/citra/pull/6344)) by [SachinVin](https://github.com/SachinVin)
 
@@ -227,6 +229,9 @@ One of these is the installation of CIA (CTR Importable Archive) files. These ar
 By offloading CIA installations to the background thread instead, we now prevent Android from accidentally terminating Citra prematurely. But, how are you, as a user, meant to know if your installation is actually working?
 
 This is where the new notification progress bar comes into play. We’ve added a convenient progression bar as a notification for you to monitor your CIA installation, even when Citra is minimized! It also will notify you if the installation has been successful or if it has failed, which is handy to know.
+
+{{< figure src="ciainstall.jpg"
+    title="" >}}
 
 # macOS
 
@@ -269,9 +274,8 @@ Imagine the horror Citra users came across when in some games, like the aforemen
 
 This being an issue since late 2020, first time contributor Polar-Star set out to fix this once and for all. By allowing the rasterizer cache control over 4x4 and 8x4 textures properly, HP bars are finally fixed and give the player to view their stats once again!
 
-{{< sidebyside "image" ""
-    "hpbroke.png=filler"
-    "hpfix.png=filler" >}}
+{{< figure src="hpbar.png"
+    title="" >}}
 
 ## Fix distance vector used when calculating lighting distance attenuation. ([#6366](https://github.com/citra-emu/citra/pull/6366)) by [Steveice10](https://github.com/Steveice10)
 
@@ -320,11 +324,11 @@ Well the change in question is actually quite desirable: it removes fully invali
 
 (insert picture)
 
-Another thing to consider is the hashing algorithm being used to identify the textures. Up until this point Citra used the deswizzled and decoded texture data as it was the most convenient option at the time. Said approach presents issues though when other graphics APIs enter the picture, namely Vulkan. As a low-level API, Vulkan accurately reports the host GPUs capabilities, meaning that certain formats Citra expects might not be natively supported, require conversions to work. Such conversions break the previously trusted hashing, which could lead to missing textures.
+Another thing to consider is the hashing algorithm being used to identify the textures. Up until this point Citra used the deswizzled and decoded texture data as it was the most convenient option at the time. Said approach presents issues though when other graphics APIs enter the picture, namely Vulkan. As a low-level API, Vulkan accurately reports the host GPUs capabilities, meaning that certain formats Citra expects might not be natively supported, requiring conversions to work. Such conversions break the previously trusted hashing, which could lead to missing textures.
 
-With the hopes of fixing the aforementioned issues, GPUCode embarked on a journey of fully rewriting the custom textures implementation. The result is a greatly improved system with a bunch of cool new features, like support for compressed formats like BC7/BC5/ASTC and their container file formats DDS/KTX. By using  these formats, the size of a texture pack can be decreased significantly while also maintaining decent image quality. Note that the BCn formats are unsupported on android devices. So, if a creator wants to target mobile, we recommend either sticking to png, or having an alternative ASTC version of the pack.
+With the hopes of fixing the aforementioned issues, GPUCode embarked on a journey of fully rewriting the custom textures implementation. The result is a greatly improved system with a bunch of cool new features, like support for compressed formats like BC7/BC5/ASTC and their container file formats DDS/KTX. By using  these formats, the size of a texture pack can be decreased significantly while also maintaining decent image quality. Note that the BCn formats are unsupported on Android devices. So, if a creator wants to target mobile, we recommend either sticking to png, or having an alternative ASTC version of the pack.
 
-Async texture loading is also supported to mitigate loading stutters, which are especially noticeable on android with the recent SAF implementation we mentioned before. We’ve also added a new hotkey to toggle between normal and HD textures without restarting the game, which is especially useful for demonstration purposes. Oh, and the icing on the cake: texture filtering with custom textures should now work as expected!
+Async texture loading is also supported to mitigate loading stutters, which are especially noticeable on Android with the recent SAF implementation we mentioned before. We’ve also added a new hotkey to toggle between normal and HD textures without restarting the game, which is especially useful for demonstration purposes. Oh, and the icing on the cake: texture filtering with custom textures should now work as expected!
 
 (insert picture)
 
@@ -360,10 +364,10 @@ This new texture filter can be enabled in `Emulation -> Configure -> Graphics ->
 
 OpenAL is an audio API designed for efficient rendering of multichannel three-dimensional positional audio. Basically, this API adds realism back to game audio by simulating attenuation and material densities. Attenuation is the degradation of sound over distance in a real world setting, due to factors such as room acoustics and alike, while material density relates to how sounds interact with different materials in a given space. 
 
-In Citra, however, we do not use this for positional audio. It is there just in case  cubeb, our default audio backend, fails for any reason. To get this working in Citra, though, a few things had to be changed first.
+In Citra, however, we do not use this for positional audio. It is there just in case Cubeb, our default audio backend, fails for any reason. To get this working in Citra, though, a few things had to be changed first.
 
-Before this PR, the input audio settings UI assumed that only a single backend would be used, cubeb, and did not have a proper selector for other options, unlike output, which did. The input UI was edited to allow “Real Device (OpenAL)” to be selected, along with “Real Device (Cubeb)” as before. 
-Citra uses an implementation of OpenAL called OpenAL Soft. By changing these UI options, along with internal code cleanup to make managing output and input devices more consistent, we can improve Citra’s portability as a whole. We also use OpenAL Soft, as it supports iOS, while cubeb does not.
+Before this PR, the input audio settings UI assumed that only the Cubeb backend would be used, and, unlike output, did not have a proper selector for other options. The input UI was edited to allow “Real Device (OpenAL)” to be selected, along with “Real Device (Cubeb)” as before. 
+Citra uses an implementation of OpenAL called OpenAL Soft. By changing these UI options, along with internal code cleanup to make managing output and input devices more consistent, we can improve Citra’s portability as a whole. We also use OpenAL Soft, as it supports iOS, while Cubeb does not.
 
 ### Implement Apple AudioToolbox AAC decoder ([#6510](https://github.com/citra-emu/citra/pull/6510)) by [Steveice10](https://github.com/Steveice10)
 
@@ -382,11 +386,11 @@ However, this change also has an implication for those who use the built-in vide
 
 # Miscellaneous
 
-### Move CPU speed slider to debug tab and Report Compatibility to help menu ([#6250](https://github.com/citra-emu/citra/pull/6250) by [FearlessTobi](https://github.com/FearlessTobi)
+### Move CPU speed slider to debug tab and Report Compatibility to help menu ([#6250](https://github.com/citra-emu/citra/pull/6250)) by [FearlessTobi](https://github.com/FearlessTobi)
 
 One of the more common issues our Citra support team comes across is users configuring the CPU Clock Speed slider to be either insanely high or low causing their games to freeze. As changing the CPU Clock Speed is very unstable, a warning about this exact issue is given in the UI to deter people from changing it, but that hasn’t stopped some users from messing with this setting anyways, nor some misinformed content creators from recommending their viewers play with it
 
-Requested by the Citra support staff, this change moves the slider to a less conspicuous area, from the System tab to the Debug tab, to hopefully bring a stop to people accidentally freezing their games all the time. This change also moves the Report Compatibility option to the Help menu, purely because it is more fitting there.
+Requested by the Citra support team, this change moves the slider to a less conspicuous area, from the System tab to the Debug tab, to hopefully bring a stop to people accidentally freezing their games all the time. This change also moves the Report Compatibility option to the Help menu, purely because it is more fitting there.
 
 ### Detect and return error if GBA Virtual Console is loaded ([#6257](https://github.com/citra-emu/citra/pull/6257)) by [Steveice10](https://github.com/Steveice10)
 
@@ -402,6 +406,9 @@ Recently added to Citra, the per-game settings bring a new way to configure the 
 After hearing your feedback, we decided to add most of the graphical enhancement options to the per-game settings. This includes features such as the resolution upscaling, custom textures, texture filters and the options for the screen layout. This way, you have many more ways to customize your games to your heart's desires, without having to change settings around for each individual game! 
 
 On top of this, we also moved the cheats section to the per-game settings instead of being in the global settings. By being available in the per-game settings, cheats are able to be managed more easily for each game they are for, and are now configurable when a game is not running. 
+
+{{< figure src="cheats.png"
+    title="" >}}
 
 ## Add consolidated GodMode9 key dumping script ([#6396](https://github.com/citra-emu/citra/pull/6396)) by [Steveice10](https://github.com/Steveice10)
 
@@ -432,6 +439,9 @@ To give a short summary of what happens, save states don’t just save your game
 
 Unfortunately, many people do not realize this. Which causes a lot of distress at lost progression and a lot of frustration fiddling around with older builds to get the saves working again. Simple solution? Warn the people of what might happen when using save states. At least that will help people to not lose their progress… right…?
 
+{{< figure src="savestate.png"
+    title="" >}}
+
 ## yuzu ports by [Morph1984](https://github.com/Morph1984) and [FearlessTobi](https://github.com/FearlessTobi)
 
 ### Enable High DPI fixes for Qt >= 5.14 ([#6262](https://github.com/citra-emu/citra/pull/6262)) originally by [Morph1984](https://github.com/Morph1984)
@@ -452,4 +462,11 @@ Both of these additions help make the multiplayer experience in Citra just that 
 
 # Conclusion
 
-blablabla not wrote up yet insert thanks to devs, community, patreon link, discord link, whatever else idc 
+Well, that’s a wrap! It has been an incredible couple of months for Citra development. We are definitely picking up speed, the likes of which we have not seen here for years, and as promised, the reports are continuing.
+A massive thanks goes out to the Citra community, especially the developers. None of this shown here would have been possible without all of the people involved here keeping this emulator afloat. These reports give us the opportunity to showcase the talented people working on this project, so you best believe they’re going to be long!
+
+If you want to support this project, we have a [Patreon](https://www.patreon.com/citraemu)! Donations to the Patreon go directly to our team to assist with obtaining hardware for testing and keeping our servers up and running. Donations are not required, but are greatly appreciated!
+
+If you are looking to contribute to Citra or just want to get involved with our community, you can find us on our [Discord server](https://discord.com/invite/FAXfZV9) or on our IRC channel (#citra @ [Libera.Chat](https://libera.chat/)). 
+
+To those of you who made it until the end, thanks for reading! We have many more exciting things to talk to you all about in the future, so stay tuned!
