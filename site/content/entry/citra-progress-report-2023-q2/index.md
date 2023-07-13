@@ -135,14 +135,16 @@ After the afformentioned APT improvements had been merged we started receiving r
 
 {{< mp4 src="mii.mp4" >}}
 
-### Skip address range checks for privileged memory (un)map ([#6407](https://github.com/citra-emu/citra/pull/6407)) by [Steveice10](https://github.com/Steveice10)
+### Add stub for ns:c service ([#6409](https://github.com/citra-emu/citra/pull/6409)) by [Steveice10](https://github.com/Steveice10)
 
 The ns:c service was introduced with firmware version 5.0.0-11, and appears to be used only by the Instruction Manual applet for triggering SD/Game Card removal errors when ejecting the media that the manual is stored on.
 By implementing a stub for the aforementioned service, the instruction manual now works on Citra!
 
 {{< figure src="manual.png"
     title="Very important for the preservation of the 3DS." >}}
-	
+
+### Skip address range checks for privileged memory (un)map ([#6407](https://github.com/citra-emu/citra/pull/6407)) by [Steveice10](https://github.com/Steveice10)
+
 Another corner of the HOME Menu that never quite worked was the Internet Browser applet, which would mysteriously cause the execution to break, alongside a healthy dose of memory errors.
 
 ```
